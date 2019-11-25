@@ -8,6 +8,9 @@
         <module>domain</module>
         <module>logic</module>
         <module>persistence</module>
+        <module>dal</module>
+        <module>dal</module>
+        <module>dal</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

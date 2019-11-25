@@ -1,36 +1,36 @@
-package com.openinno.dal.services;
+package com.openinno.dal;
 
-import com.openinno.dal.repositories.PageRepository;
+import com.openinno.dal.UserRepository;
 import com.openinno.domain.interfaces.CRUD;
-import com.openinno.domain.models.Page;
+import com.openinno.domain.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PageService implements CRUD<Page, Long> {
+public class UserService implements CRUD<User,Long> {
 
-    @Qualifier("PageRepository")
+    @Qualifier("UserRepository")
     @Autowired
-    private PageRepository repository;
+    private UserRepository repository;
 
     @Override
-    public Page create(Page entity) {
+    public User create(User entity) {
         return repository.save(entity);
     }
 
     @Override
-    public Page read(Long id) {
+    public User read(Long id) {
         return repository.findById(id).get();
     }
 
     @Override
-    public Iterable<Page> readAll() {
+    public Iterable<User> readAll() {
         return repository.findAll();
     }
 
     @Override
-    public Page update(Page entity) {
+    public User update(User entity) {
         return repository.save(entity);
     }
 

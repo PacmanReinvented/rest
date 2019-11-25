@@ -1,32 +1,34 @@
 package com.openinno.persistence.controllers;
 
 import com.openinno.domain.interfaces.RESTCRUD;
-import com.openinno.domain.models.Message;
-import com.openinno.logic.handlers.MessageHandler;
+import com.openinno.domain.models.User;
+import com.openinno.logic.handlers.UserHandler;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = {"http://localhost:4200","*"})
 @RestController
-@RequestMapping("/messages")
-public class MessageController implements RESTCRUD<Message,Long> {
+@RequestMapping("/users")
+public class UserController implements RESTCRUD<User,Long> {
 
     @Setter
-    private MessageHandler handler;
+    private UserHandler handler;
 
-    public MessageController() {
+    public UserController() {
     }
 
     @Autowired
-    public MessageController(MessageHandler handler) {
+    public UserController(UserHandler handler) {
         this.handler = handler;
     }
 
     @Override
-    public ResponseEntity create(Message entity) {
+    public ResponseEntity create(User entity) {
         return new ResponseEntity<>(handler.create(entity), HttpStatus.valueOf(200));
     }
 
@@ -41,17 +43,12 @@ public class MessageController implements RESTCRUD<Message,Long> {
     }
 
     @Override
-    public ResponseEntity update(Message entity) {
+    public ResponseEntity update(User entity) {
         return new ResponseEntity<>(handler.update(entity), HttpStatus.valueOf(200));
     }
 
     @Override
     public ResponseEntity delete(Long id) {
         return new ResponseEntity<>(handler.delete(id), HttpStatus.valueOf(200));
-    }
-
-    @RequestMapping(value = "/classify",method = RequestMethod.POST)
-    public ResponseEntity classify(@RequestBody Message entity) {
-        return new ResponseEntity<>(handler.classify(entity), HttpStatus.valueOf(200));
     }
 }
